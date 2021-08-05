@@ -1,13 +1,18 @@
 package ec.edu.espe.distribuidas.examen.grupo2.controller;
 
 import ec.edu.espe.distribuidas.examen.grupo2.dto.PersonaDireccionRQ;
+import ec.edu.espe.distribuidas.examen.grupo2.dto.PersonaDireccionRS;
 import ec.edu.espe.distribuidas.examen.grupo2.model.PersonaDireccion;
 import ec.edu.espe.distribuidas.examen.grupo2.model.PersonaDireccionPK;
 import ec.edu.espe.distribuidas.examen.grupo2.service.PersonaDireccionService;
+import ec.edu.espe.distribuidas.examen.grupo2.transform.PersonaRSTransform;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +34,12 @@ public class PersonaDireccionController {
     @GetMapping(value = "{codigoPersona}")
     @ApiOperation(value = "Lista las direcciones por cada persona", notes = "Lista las direcciones por cada persona")
     public ResponseEntity obtenerDireccionesDePersona(@PathVariable("codigoPersona") Integer codigoPersona) {
-        log.info(this.service.listarDireccionesPersona(codigoPersona).toString());
-        return ResponseEntity.ok().build();
+        List<PersonaDireccion> direcciones = this.service.listarDireccionesPersona(codigoPersona);
+        List<PersonaDireccionRS> response = new ArrayList<>();
+        for(PersonaDireccion direccion: direcciones){
+            response.add(PersonaRSTransform.buildPersonaDireccionRS(direccion));
+        }
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
@@ -53,6 +62,6 @@ public class PersonaDireccionController {
         pk.setSecPersonaDireccion(request.getSecPersonaDireccion());
         personaDireccion.setPk(pk);
         this.service.agregarDireccion(personaDireccion);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
