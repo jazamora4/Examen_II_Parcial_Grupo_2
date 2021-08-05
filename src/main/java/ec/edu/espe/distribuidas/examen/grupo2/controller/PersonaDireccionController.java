@@ -63,10 +63,12 @@ public class PersonaDireccionController {
         personaDireccion.setPk(pk);
         try {
             this.service.agregarDireccion(personaDireccion);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception exception) {
             log.error(exception.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
 }
