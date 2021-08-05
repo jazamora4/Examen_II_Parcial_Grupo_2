@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PersonaDireccionRepository extends JpaRepository<PersonaDireccion, PersonaDireccionPK> {
 
-    List<PersonaDireccion> findByPKcodigoPersonaOrderByCodigoTipoDireccionAsc(Integer codPaciente);
+    List<PersonaDireccion> findByPkCodigoPersonaOrderByCodigoTipoDireccionAsc(Integer codigoPersona);
 
-    List<PersonaDireccion> findByPKcodigoPersonaAndCodigoTipoDireccion(Integer codPaciente, String codTipo);
+    List<PersonaDireccion> findByPkCodigoPersonaAndCodigoTipoDireccion(Integer codigoPersona, String codTipo);
 
 }

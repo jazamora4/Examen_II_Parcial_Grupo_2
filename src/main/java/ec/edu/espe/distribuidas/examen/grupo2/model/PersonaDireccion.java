@@ -20,7 +20,7 @@ import lombok.ToString;
 public class PersonaDireccion {
 
     @EmbeddedId
-    private PersonaDireccionPK PK;
+    private PersonaDireccionPK pk;
     @Column(name = "calle_principal", nullable = false, length = 100)
     private String callePrincipal;
     @Column(name = "numeracion", nullable = false, length = 15)
