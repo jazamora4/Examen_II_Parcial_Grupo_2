@@ -18,8 +18,9 @@ import lombok.ToString;
 @Entity
 @Table(name = "per_persona_direccion", schema = "public", catalog = "examen_direcciones")
 public class PersonaDireccion {
+
     @EmbeddedId
-    private PersonaDireccionPK personaDireccionPK;
+    private PersonaDireccionPK PK;
     @Column(name = "calle_principal")
     private String callePrincipal;
     @Column(name = "numeracion")
@@ -30,6 +31,8 @@ public class PersonaDireccion {
     private String barrio;
     @Column(name = "por_omision")
     private String porOmision;
+    @Column(name = "cod_tipo_direccion")
+    private String codigoTipoDireccion;
 
     @MapsId("codigoPersona")
     @JoinColumn(name = "cod_persona",
