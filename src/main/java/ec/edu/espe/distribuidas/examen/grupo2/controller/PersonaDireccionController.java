@@ -36,7 +36,7 @@ public class PersonaDireccionController {
     public ResponseEntity obtenerDireccionesDePersona(@PathVariable("codigoPersona") Integer codigoPersona) {
         List<PersonaDireccion> direcciones = this.service.listarDireccionesPersona(codigoPersona);
         List<PersonaDireccionRS> response = new ArrayList<>();
-        for(PersonaDireccion direccion: direcciones){
+        for (PersonaDireccion direccion : direcciones) {
             response.add(PersonaRSTransform.buildPersonaDireccionRS(direccion));
         }
         return ResponseEntity.ok(response);
@@ -48,7 +48,7 @@ public class PersonaDireccionController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK. La dirección se ha insertado correctamente"),
             @ApiResponse(code = 400, message = "Bad Request. No se ha podido insertar la dirección"),
-            @ApiResponse(code = 500, message = "Error inesperado del sistema")})
+            @ApiResponse(code = 500, message = "Error inesperado del sistema") })
     public ResponseEntity crearDireccion(@RequestBody PersonaDireccionRQ request) {
         PersonaDireccion personaDireccion = new PersonaDireccion();
         personaDireccion.setCodigoTipoDireccion(request.getCodigoTipoDireccion());
@@ -61,7 +61,12 @@ public class PersonaDireccionController {
         pk.setCodigoPersona(request.getCodigoPersona());
         pk.setSecPersonaDireccion(request.getSecPersonaDireccion());
         personaDireccion.setPk(pk);
-        this.service.agregarDireccion(personaDireccion);
+        try {
+            this.service.agregarDireccion(personaDireccion);
+        } catch (Exception exception) {
+            log.error(exception.getMessage());
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
