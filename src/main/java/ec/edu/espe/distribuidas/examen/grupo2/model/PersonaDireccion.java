@@ -19,16 +19,16 @@ import lombok.ToString;
 @Table(name = "per_persona_direccion", schema = "public", catalog = "examen_direcciones")
 public class PersonaDireccion {
     @EmbeddedId
-    private PersonaDireccionPK personaDireccionPK;
-    @Column(name = "calle_principal")
+    private PersonaDireccionPK PK;
+    @Column(name = "calle_principal", nullable = false, length = 100)
     private String callePrincipal;
-    @Column(name = "numeracion")
+    @Column(name = "numeracion", nullable = false, length = 15)
     private String numeracion;
-    @Column(name = "calle_secundaria")
+    @Column(name = "calle_secundaria", nullable = false, length = 100)
     private String calleSecundaria;
-    @Column(name = "barrio")
+    @Column(name = "barrio", nullable = false, length = 100)
     private String barrio;
-    @Column(name = "por_omision")
+    @Column(name = "por_omision", nullable = false, length = 1)
     private String porOmision;
 
     @MapsId("codigoPersona")

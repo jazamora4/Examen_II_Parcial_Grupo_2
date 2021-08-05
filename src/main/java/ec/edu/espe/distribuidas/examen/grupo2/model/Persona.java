@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.Data;
 
 @Data
@@ -17,21 +19,36 @@ import lombok.Data;
 @Table(name = "per_persona", schema = "public", catalog = "examen_direcciones")
 public class Persona {
     @Id
-    @Column(name = "cod_persona")
+    @Column(name = "cod_persona",
+            nullable = false)
     private Integer codigo;
-    @Column(name = "cod_empresa")
+    @Column(name = "cod_empresa",
+            nullable = false,
+            length = 8)
     private String codigoEmpresa;
-    @Column(name = "fecha_ingreso")
+    @Column(name = "fecha_ingreso",
+            nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
-    @Column(name = "nombres")
+    @Column(name = "nombres",
+            nullable = false,
+            length = 250)
     private String nombres;
-    @Column(name = "nombre1")
+    @Column(name = "nombre1",
+            nullable = false,
+            length = 50)
     private String nombre1;
-    @Column(name = "nombre2")
+    @Column(name = "nombre2",
+            nullable = false,
+            length = 50)
     private String nombre2;
-    @Column(name = "apellido1")
+    @Column(name = "apellido1",
+            nullable = false,
+            length = 50)
     private String apellido1;
-    @Column(name = "apellido2")
+    @Column(name = "apellido2",
+            nullable = false,
+            length = 50)
     private String apellido2;
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<PersonaDireccion> direcciones;
