@@ -14,6 +14,7 @@ public class PersonaRSTransform {
                 .nombreTipoDireccion(personaDireccion.getTipoDireccion().getNombre())
                 .observacionTipoDireccion(personaDireccion.getTipoDireccion().getObservacion())
                 .estadoTipoDireccion(personaDireccion.getTipoDireccion().getEstado())
+                .codigoTipoDireccion(personaDireccion.getCodigoTipoDireccion())
                 .build();
     }
 }

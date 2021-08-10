@@ -15,5 +15,6 @@ public class PersonaDireccionRS {
     private String nombreTipoDireccion;
     private String observacionTipoDireccion;
     private String estadoTipoDireccion;
+    private String codigoTipoDireccion;
 
 }

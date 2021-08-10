@@ -47,6 +47,12 @@ public class PersonaDireccionService {
             } else {
                 throw new RuntimeException("La persona ya tiene un direccion de ese tipo");
             }
+            if (direccion.getPersona().getCodigo()
+                    .equals(personaDireccion.getPk().getCodigoPersona())
+                    && direccion.getPk().getSecPersonaDireccion()
+                    .equals(personaDireccion.getPk().getSecPersonaDireccion())){
+                throw new RuntimeException("La direccion ya existe para esa persona");
+            }
         }
         personaDireccion.setPersona(persona);
         personaDireccion.setTipoDireccion(tipoDireccion);
